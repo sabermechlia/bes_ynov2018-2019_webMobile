@@ -1,3 +1,4 @@
+import { omdbApiService } from './../providers/omdbservices/omdbservices';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,14 +7,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { OmdbservicesProvider } from '../providers/omdbservices/omdbservices';
-
+import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
     HomePage
   ],
   imports: [
+    HttpModule, 
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -26,7 +27,7 @@ import { OmdbservicesProvider } from '../providers/omdbservices/omdbservices';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    OmdbservicesProvider
+    omdbApiService
   ]
 })
 export class AppModule {}
