@@ -7,17 +7,28 @@
 </ion-header>
 
 <ion-content >
-<ion-card>
-  <img src={{resultat.Poster}}/>
-  <ion-card-content>
-    <ion-card-title>
-      {{resultat.Title}}
-      </ion-card-title>
-    <p>
-      {{resultat.imdbRating}}
-    </p>
-  </ion-card-content>
-</ion-card>
-  
+    <ion-searchbar  [(ngModel)]="titre" (ionInput)="search(titre)"></ion-searchbar>
+    
+          <div class="col" id="ResultatOnSeccess" *ngIf=resultat >
+              <ion-card>
+                <img (tap)="showDetails()" src={{resultat.Poster}}/>
+                <ion-card-content>
+                  <ion-card-title>
+                    {{resultat.Title}}
+                   </ion-card-title>
+                  <p>
+                    
+                    {{resultat.imdbRating}}
+                   </p>
+                </ion-card-content>
+               </ion-card>
+            </div>
+    
+      
+         
+    
+    <div id="ResultatFeild" *ngIf=!resultat>
+      <h5>Pas d'info</h5>
+    </div>
   
 </ion-content>
