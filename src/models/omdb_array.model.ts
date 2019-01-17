@@ -1,5 +1,8 @@
-import { ImdbApiGlobal } from './imdbapi-global.model';
+
+import { searchs } from './searchsmodel';
 export class OmdbArray{
-list:ImdbApiGlobal[];
+    Search:searchs[];
+    totalResults:number
+    Response:boolean
 
 }
