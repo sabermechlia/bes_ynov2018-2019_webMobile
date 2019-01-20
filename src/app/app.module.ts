@@ -1,3 +1,4 @@
+
 import { omdbServiceArray } from './../providers/omdbservices/omdbservicesarray';
 import { omdbApiService } from './../providers/omdbservices/omdbservices';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,12 +7,14 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { HttpModule } from '@angular/http';
+import { IndexPage } from '../pages/index';
+import { NewsApiProvider } from '../providers/news-api/news-api';
+
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    IndexPage,
     
   ],
   imports: [
@@ -22,7 +25,7 @@ import { HttpModule } from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    IndexPage,
     
   ],
   providers: [
@@ -30,7 +33,8 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     omdbApiService,
-    omdbServiceArray
+    omdbServiceArray,
+    NewsApiProvider
   ]
 })
 export class AppModule {}

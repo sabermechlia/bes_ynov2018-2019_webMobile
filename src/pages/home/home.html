@@ -7,27 +7,43 @@
 </ion-header>
 
 <ion-content >
-    <ion-searchbar  [(ngModel)]="titre" (ionInput)="searchArray(titre)"></ion-searchbar>
-    <div *ngIf=resultats >
-     <ion-card *ngFor="let result of resultats.Search" >
-        <ion-item>
-            <ion-avatar  item-start>
-            <img (tap)="showDetails(result.imdbID)" [src]="result.Poster">
-            </ion-avatar>
-            <h2 text-capitalize>{{result.Title}}</h2>
+    
+       
+    <ion-searchbar  [(ngModel)]="titre" (ionInput)="searchArray($event)"></ion-searchbar>
+    <div *ngIf=tab >
+        <ion-slides>
+       
+        <ion-list *ngFor="let result of tab" >
+           <ion-slide>
+            <ion-item>
+             
+                
+                <img item-start class="monImage" (tap)="showDetails(result.imdbID)" [src]="testImg(result.Poster)">
+                
+                
+
+  
+                 
+               
+              <h2 class="titre">{{result.Title}}</h2>
+              <p>
+                <ion-badge item-end>{{result.Year}}</ion-badge>
+              </p>
             </ion-item>
-            <ion-card-content>
-                {{result.Year}}
-            </ion-card-content>
-     </ion-card>
-          </div>
+          </ion-slide>
+      
+          </ion-list>
+        </ion-slides>
+     
         <ion-infinite-scroll (ionInfinite)="loadMore($event)" >
             <ion-infinite-scroll-content
               loadingSpinner="bubbles"
               loadingText="Loading more data...">
             </ion-infinite-scroll-content>
           </ion-infinite-scroll>
+    
         
+        </div>      
       
     <div id="ResultatFeild" *ngIf=!resultat>
       <h5>Pas d'info</h5>

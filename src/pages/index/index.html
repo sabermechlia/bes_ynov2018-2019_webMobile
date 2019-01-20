@@ -1,0 +1,46 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-icon (tap)="searchPage()" ios="ios-search" ></ion-icon>
+  </ion-navbar>
+
+</ion-header> 
+
+
+<ion-content *ngIf=arrays>
+  <h4 class="titre">Box Office</h4>
+    <ion-slides slidesPerView="3"   class="MonSlides">
+           <ion-slide  *ngFor="let result of arrays"> 
+              <div > 
+                <img  
+                (tap)="showDetails(result.imdbID)"
+                 [src]="testImg(result.Poster)">           
+                <div class="titre">
+                  {{result.imdbRating}}
+                  <ion-icon name="star"></ion-icon>
+                </div>
+              </div>
+          </ion-slide>
+        </ion-slides>
+        <h4 class="titre">News </h4>
+        <ion-slides class="MonSlides" >
+            <ion-slide  *ngFor="let article of news.articles"  > 
+                <ion-card>
+                    <img [src]=article.urlToImage/>
+                    <ion-card-content>
+                      <ion-card-title>
+                          {{article.title}}
+                        </ion-card-title>
+                      <p>
+                        {{article.content}}
+                      </p>
+                    </ion-card-content>
+                  </ion-card>
+           </ion-slide>
+         </ion-slides>
+       
+</ion-content>
+<ion-footer>
+    NewsAPI.org
+</ion-footer>
+     
