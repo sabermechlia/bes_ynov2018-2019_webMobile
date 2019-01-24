@@ -1,11 +1,12 @@
 import { OmdbArray } from './../../models/omdb_array.model';
 import { Injectable } from '@angular/core';
 
-
+AlertController
 import {Http} from '@angular/http'
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
+import { AlertController } from 'ionic-angular';
 
  
 @Injectable()
@@ -28,4 +29,5 @@ export class omdbServiceArray{
    .then(response => response.json() )
    .catch(error => console.log('une erreur est servenue'+error))
   }
+   
 }

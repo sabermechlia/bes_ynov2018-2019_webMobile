@@ -1,11 +1,13 @@
 import { omdbServiceArray } from './../../providers/omdbservices/omdbservicesarray';
 import { ImdbApiGlobal } from './../../models/imdbapi-global.model';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, IonicPage } from 'ionic-angular';
 import { omdbApiService } from '../../providers/omdbservices/omdbservices';
 import { OmdbArray } from '../../models/omdb_array.model';
 import { searchs } from '../../models/searchsmodel';
 
+
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -20,6 +22,8 @@ titre:string;
 maxpage=1;
 tab:searchs[]=null;
 error:string;
+TabGauche:searchs[];
+TabDroite:searchs[];
 no_poster='../../assets/imgs/no_poster.jpg';
 private idPage:number=1;
   constructor(public navCtrl: NavController, private omdbApiService:omdbApiService,private omdbServiceArray:omdbServiceArray ) {
@@ -30,6 +34,7 @@ private idPage:number=1;
     this.omdbApiService.getResutat(titre)
     .then(resultatFetched => {
       this.resultat = resultatFetched;
+     
       console.log(this.resultat);
 
     });
@@ -44,6 +49,10 @@ private idPage:number=1;
         this.titre=this.titre;
        this.idPage=1;
        this.tab=this.resultats.Search;
+       var m=this.tab.length/2;
+       var max=this.tab.length;
+       this.TabGauche.slice(0,m);
+       this.TabDroite.slice(m,max);
        console.log("first tab dans le recherche  "+this.tab);
       })
       .catch(error=>this.error="Pas de connexion internet");

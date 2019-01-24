@@ -1,9 +1,12 @@
+
 import { NewsApiProvider } from './../../providers/news-api/news-api';
 import { omdbApiService } from './../../providers/omdbservices/omdbservices';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ImdbApiGlobal } from '../../models/imdbapi-global.model';
 import { newsApiGlobal } from '../../models/newsapi-global.model';
+
+
 
 
 @IonicPage()
@@ -21,9 +24,15 @@ export class IndexPage {
   no_poster='../../assets/imgs/no_poster.jpg';
   titreTopFive = ['The Upside', '	Aquaman','A Dog\'s Way Home','Spider-Man: Into the Spider-Verse','Escape Room'];
   arrays=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams,private omdbApiService:omdbApiService,private newsApi:NewsApiProvider) {
+  constructor(public navCtrl: NavController,
+       public navParams: NavParams,
+       private omdbApiService:omdbApiService,
+       private newsApi:NewsApiProvider,
+       public loadingCtrl: LoadingController) {
+  
   this.initTopFive();
   this.initNews();
+  this.startPage();
   }
   initNews()
   {
@@ -65,7 +74,23 @@ testImg(src:string)
   ionViewDidLoad() {
     
   }
-  searchPage(){
+ public searchPage(){
     this.navCtrl.push('HomePage');
   }
+ private startPage():void{
+  {
+    let loading = this.loadingCtrl.create({
+     
+      content: 'Please wait...'
+      
+    });
+  
+    loading.present();
+  
+     setTimeout(() => {
+       loading.dismiss();
+     }, 3000, 
+     );
+  }
+ }
 }

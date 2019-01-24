@@ -1,4 +1,3 @@
-
 import { omdbServiceArray } from './../providers/omdbservices/omdbservicesarray';
 import { omdbApiService } from './../providers/omdbservices/omdbservices';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,22 +9,29 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IndexPage } from '../pages/index';
 import { NewsApiProvider } from '../providers/news-api/news-api';
+import { ConnectionProvider } from '../providers/connection/connection';
+import { NetworkOriginal } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
     MyApp,
     IndexPage,
     
+    
+    
   ],
   imports: [
     HttpModule, 
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     IndexPage,
+    
+    
     
   ],
   providers: [
@@ -34,7 +40,9 @@ import { NewsApiProvider } from '../providers/news-api/news-api';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     omdbApiService,
     omdbServiceArray,
-    NewsApiProvider
+    NewsApiProvider,
+    ConnectionProvider,
+    NetworkOriginal
   ]
 })
 export class AppModule {}
