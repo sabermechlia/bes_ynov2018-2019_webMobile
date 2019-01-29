@@ -41,19 +41,20 @@ private idPage:number=1;
   }
     public searchArray()
     {  this.tab=null;
+      this.TabDroite=null;
+      this.TabGauche=null;
       this.omdbServiceArray.getResutatArray(this.titre,this.idPage)
       .then(resultatFetched => {
         this.resultats = resultatFetched;
-        console.log(this.resultats);
         this.maxpage=this.resultats.totalResults/10;
         this.titre=this.titre;
-       this.idPage=1;
-       this.tab=this.resultats.Search;
-       var m=this.tab.length/2;
-       var max=this.tab.length;
-       this.TabGauche.slice(0,m);
-       this.TabDroite.slice(m,max);
-       console.log("first tab dans le recherche  "+this.tab);
+        this.idPage=1;
+        this.tab=this.resultats.Search;
+        console.log("first tab dans le recherche  "+this.tab);
+        var m=this.tab.length/2;
+        var max=this.tab.length;
+        this.TabGauche=this.tab.slice(0,m);
+        this.TabDroite=this.tab.slice(m,max);
       })
       .catch(error=>this.error="Pas de connexion internet");
   }

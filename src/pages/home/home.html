@@ -5,60 +5,32 @@
       <button ion-button icon-only>
         <ion-icon name="option"></ion-icon>
       </button>
-      <button ion-button icon-only >
-          <ion-icon name="settings"></ion-icon>
+      <button ion-button icon-only>
+        <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+
+
+
 <ion-content class="fond">
   <div *ngIf=tab>
-        <!-- <ion-slides slidesPerView="2"   class="MonSlides">
-            <ion-slide  *ngFor="let result of tab" > 
-             <ion-card class="ion-card">
-                 <ion-card-content style="padding: 0%">
-                 <img  
-                 (tap)="showDetails(result.imdbID)"
-                  [src]="testImg(result.Poster)">           
-                 <div class="titre">
-                   {{result.Year}}
-                   <ion-icon name="star"></ion-icon>
-                 </div>
-                 </ion-card-content>
-                 </ion-card>
-           </ion-slide>
-         </ion-slides> -->
-    
-     <ion-card class="ion-card" *ngFor="let result of TabGauche">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 col-md-4 col-xl-3 *ngFor="let result of tab">
+          <ion-card class="ion-card">
+            <ion-card-content style="padding: 0%">
               <img item-start (tap)="showDetails(result.imdbID)" [src]="testImg(result.Poster)">
-          </ion-col>
-          <ion-col>
-              <ion-card-title class="titre">
-                  {{result.Title}}
-                </ion-card-title>
-                <ion-badge item-end>{{result.Year}}</ion-badge>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card> 
-    <ion-card class="ion-card" *ngFor="let result of TabDroite">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-              <img item-start (tap)="showDetails(result.imdbID)" [src]="testImg(result.Poster)">
-          </ion-col>
-          <ion-col>
-              <ion-card-title class="titre">
-                  {{result.Title}}
-                </ion-card-title>
-                <ion-badge item-end>{{result.Year}}</ion-badge>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card> 
+            </ion-card-content>
+            <div class="titre" style="text-align:center">
+                            {{result.Title}}
+              <ion-badge>{{result.Year}}</ion-badge>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>

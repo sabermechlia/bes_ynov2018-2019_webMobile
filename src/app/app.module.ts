@@ -9,8 +9,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IndexPage } from '../pages/index';
 import { NewsApiProvider } from '../providers/news-api/news-api';
-import { ConnectionProvider } from '../providers/connection/connection';
-import { NetworkOriginal } from '@ionic-native/network';
+
 
 @NgModule({
   declarations: [
@@ -41,8 +40,7 @@ import { NetworkOriginal } from '@ionic-native/network';
     omdbApiService,
     omdbServiceArray,
     NewsApiProvider,
-    ConnectionProvider,
-    NetworkOriginal
+  
   ]
 })
 export class AppModule {}

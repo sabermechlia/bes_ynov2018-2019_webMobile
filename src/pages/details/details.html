@@ -1,75 +1,37 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title class ="titre" *ngIf="resultat" >{{resultat.Title}}</ion-title>
+    <ion-title class="titre" *ngIf="resultat">{{resultat.Title}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content  class="fond description">
+<ion-content class="fond description">
   <ion-card class="ion-card" *ngIf="resultat">
-    <img  src={{posterUrl}}/>
-    <ion-card-content>
-        <ion-grid >
-            <ion-row >
-              <ion-col >
-                Year
-              </ion-col>
-              <ion-col>
-                {{resultat.Year}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    Metascore
-                </ion-col>
-                <ion-col>
-                  {{resultat.Metascore}}
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col>
-                      imdbRating
-                  </ion-col>
-                  <ion-col>
-                    {{resultat.imdbRating}}
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        Runtime
-                    </ion-col>
-                    <ion-col>
-                      {{resultat.Runtime}}
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col>
-                          Genre
-                      </ion-col>
-                      <ion-col>
-                        {{resultat.Genre}}
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            Director
-                        </ion-col>
-                        <ion-col>
-                          {{resultat.Director}}
-                        </ion-col>
-                      </ion-row>
-                      <ion-row>
-                          <ion-col>
-                              Actors
-                          </ion-col>
-                          <ion-col>
-                            {{resultat.Actors}}
-                          </ion-col>
-                        </ion-row>
-           </ion-grid>
+    <ion-card-content style="padding: 0%">
+      <img src={{posterUrl}} />
+      <ion-slides class="MonSlides" slidesPerView="3" loop="true">
+        <ion-slide >
+          <ion-badge color="dark">
+            {{resultat.Genre}}
+          </ion-badge>
+        </ion-slide>
+        <ion-slide>
+          <ion-badge color="dark">
+            {{resultat.Year}}
+          </ion-badge>
+        </ion-slide>
+        <ion-slide>
+          <ion-badge color="dark">
+            {{resultat.imdbRating}}
+            <ion-icon name="star"></ion-icon>
+          </ion-badge>
+        </ion-slide>
+        <ion-slide>
+          <ion-badge color="dark">
+            {{resultat.Runtime}}
+          </ion-badge>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
-   </ion-card>
-
+  </ion-card>
 </ion-content>
