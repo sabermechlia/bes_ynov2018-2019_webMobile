@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class YoutubeServiceProvider {
     private baseUrl: string ='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&key=';
-    private Key: string ='yourKey';
+    private Key: string ='your key';
     private q: string ='&q=';
     private chanelID:string='&channelId=UClgRkhTL3_hImCAmdLfDE4g'
   constructor(public http: Http) {

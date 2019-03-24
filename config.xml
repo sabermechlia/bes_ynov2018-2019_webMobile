@@ -19,7 +19,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
-    <preference name="YouTubeDataApiKey" value="AIzaSyBuRrdh8lIi4LxNfm_YGvUaYVKiWnaiGGQ" />
+    <preference name="YouTubeDataApiKey" value="your Key" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -93,7 +93,7 @@
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
     <plugin name="cordova-plugin-googlemaps" spec="2.5.2">
-        <variable name="API_KEY_FOR_ANDROID" value="YourKey" />
+        <variable name="API_KEY_FOR_ANDROID" value="your key" />
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>

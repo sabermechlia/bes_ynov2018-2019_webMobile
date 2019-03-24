@@ -96,7 +96,7 @@
         "MIN_BACKGROUND_DURATION": "30"
       },
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyBm33InGqa2Q3NiS0h_39spBy7WIqhBvuE",
+        "API_KEY_FOR_ANDROID": "your key",
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },

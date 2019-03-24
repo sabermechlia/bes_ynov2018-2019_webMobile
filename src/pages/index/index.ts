@@ -1,15 +1,14 @@
-
+import { CinemaMap } from './../../models/cinema.mapping';
+import { CinemaMappingMock } from '../../models/cinema.mapping';
 import { DataBaseProvider } from './../../providers/data-dase/data-dase';
 import { imdbYoutube } from './../../models/imdbYoutube/imdbYoutube.model';
 import { YoutubeServiceProvider } from './../../providers/youtube-service/youtube-service';
-import { NewsApiProvider } from './../../providers/news-api/news-api';
-import { omdbApiService } from './../../providers/omdbservices/omdbservices';
 import { Component } from '@angular/core';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapsAnimation, LatLng, CameraPosition, MarkerOptions, Marker } from '@ionic-native/google-maps';
 import { IonicPage, NavController, NavParams, LoadingController, MenuController, ToastController, Platform } from 'ionic-angular';
 import { ImdbApiGlobal } from '../../models/imdbapi-global.model';
 import { newsApiGlobal } from '../../models/newsapi-global.model';
-import * as TreeMapping from '../../models/tree.mapping';
+import * as CinemaMapping from '../../models/cinema.mapping';
 import { Geolocation } from '@ionic-native/geolocation';
 
 const MARKER_SIZE = 30;
@@ -20,7 +19,7 @@ const MARKER_SIZE = 30;
 })
 
 export class IndexPage {
-  private trees: TreeMapping.TreeMap[] = [];
+  private cinemas:CinemaMapping.CinemaMap[]=[];
   public map: GoogleMap;
   news: newsApiGlobal = new newsApiGlobal();
   resultat: ImdbApiGlobal;
@@ -36,8 +35,7 @@ export class IndexPage {
   userPosition: LatLng;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private omdbApiService: omdbApiService,
-    private newsApi: NewsApiProvider,
+   
     public loadingCtrl: LoadingController,
     public youtube: YoutubeServiceProvider,
     public menu: MenuController,
@@ -47,7 +45,7 @@ export class IndexPage {
     public platform: Platform,
     private geoLocation: Geolocation
   ) {
-    this.trees = TreeMapping.TreeMappingMock;
+    this.cinemas = CinemaMapping.CinemaMappingMock;
     
 
 
@@ -88,8 +86,8 @@ export class IndexPage {
         console.log('Map is ready!');
         this.getGeoLocation();
         
-          for (var tree of this.trees) {
-            this.addMarkerOnMap(tree);
+          for (var cinema of this.cinemas) {
+            this.addMarkerOnMap(cinema);
           }
        
 
@@ -120,12 +118,12 @@ export class IndexPage {
     });
   }
 
-  private addMarkerOnMap(tree: TreeMapping.TreeMap) {
+  private addMarkerOnMap(cinema: CinemaMapping.CinemaMap) {
     // create LatLng object
-    let markerPosition: LatLng = new LatLng(tree.lat, tree.lng);
+    let markerPosition: LatLng = new LatLng(cinema.lat, cinema.lng);
 
     let markerIcon = {
-      'url': tree.globalImage,
+      
       'size': {
         width: Math.round(MARKER_SIZE),
         height: Math.round(MARKER_SIZE)
@@ -133,7 +131,7 @@ export class IndexPage {
     }
     let markerOptions: MarkerOptions = {
       position: markerPosition,
-      title: tree.name,
+      title: cinema.name,
       animation: GoogleMapsAnimation.DROP,
       icon: markerIcon
     };
