@@ -1,0 +1,97 @@
+
+<ion-header >
+  <ion-navbar >
+      
+          <button ion-button menuToggle  >
+              <ion-icon name="person"></ion-icon>
+          </button> 
+          
+      <ion-buttons end>
+      <button ion-button icon-only (tap)="searchPage()"  >
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+  
+</ion-header>  
+<ion-content *ngIf=array class="fond">
+    
+    <ion-tabs>
+        <ion-tab tab="home">Home Content</ion-tab>
+        <ion-tab tab="settings">Settings Content</ion-tab>
+      
+        <ion-tab bar slot="bottom">
+      
+          <ion-tab button tab="home">
+            <ion-label>Home</ion-label>
+            <ion-icon name="home"></ion-icon>
+            <ion-badge>6</ion-badge>
+          </ion-tab>
+      
+          <ion-tab button tab="settings">
+            <ion-label>Settings</ion-label>
+            <ion-icon name="settings"></ion-icon>
+          </ion-tab>
+      
+        </ion-tab>
+      </ion-tabs>
+    <ion-card class="ion-card">
+    <ion-card-content>
+        <h4 class="titre">Box Office</h4>
+    </ion-card-content>
+  </ion-card>
+    <ion-slides slidesPerView="3"   class="MonSlides">
+           <ion-slide  *ngFor="let result of array" > 
+            <ion-card class="ion-card">
+            <ion-card-content  style="padding: 0%">
+                <img  
+                (tap)="showDetails(result.imdbID)"
+                 [src]="testImg(result.Poster)" (error)="img.src = no_poster" #img>           
+                <div class="titre">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col>
+                          {{result.imdbRating}} 
+                           <ion-icon name="star" class="star"></ion-icon>
+                      </ion-col>
+                      <ion-col>
+                        
+                            <ion-icon  name="heart" (click)="addFavorieFilm(result.imdbID)"></ion-icon>
+                 
+                         
+                       </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                 
+                
+                </div>
+                </ion-card-content>
+                </ion-card>
+          </ion-slide>
+        </ion-slides>
+        <ion-card class="ion-card">
+        <ion-card-content>
+            <h4 class="titre">News </h4>
+        </ion-card-content>
+      </ion-card>
+        <ion-slides class="MonSlides" >
+            <ion-slide  *ngFor="let article of news.articles"  > 
+                <ion-card class="ion-card">
+                    <img  [src]=article.urlToImage/>
+                    <ion-card-content>
+                      <ion-card-title class="titre">
+                          {{article.title}}
+                        </ion-card-title>
+                      <p class="description">
+                        {{article.content}}
+                      </p>
+                    </ion-card-content>
+                  </ion-card>
+           </ion-slide>
+          </ion-slides>
+          NewsAPI.org
+       </ion-content>
+<ion-footer>
+</ion-footer>
+     

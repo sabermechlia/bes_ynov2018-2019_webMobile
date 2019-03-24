@@ -1,12 +1,13 @@
 import { omdbServiceArray } from './../../providers/omdbservices/omdbservicesarray';
 import { ImdbApiGlobal } from './../../models/imdbapi-global.model';
-import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { omdbApiService } from '../../providers/omdbservices/omdbservices';
 import { OmdbArray } from '../../models/omdb_array.model';
 import { searchs } from '../../models/searchsmodel';
-
-
+import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { DataBaseProvider } from '../../providers/data-dase/data-dase';
+DataBaseProvider
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -26,8 +27,75 @@ TabGauche:searchs[];
 TabDroite:searchs[];
 no_poster='../../assets/imgs/no_poster.jpg';
 private idPage:number=1;
-  constructor(public navCtrl: NavController, private omdbApiService:omdbApiService,private omdbServiceArray:omdbServiceArray ) {
+Type:string;
+isSpeechAvailable = false;
+isListening = false;
+matches: string;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private omdbApiService:omdbApiService,
+    private omdbServiceArray:omdbServiceArray ,
+    private speechRecognition: SpeechRecognition,
+    private changeDetectorRef: ChangeDetectorRef,
+    private maBase:DataBaseProvider) {
+      this.Type=this.navParams.get('type');
+      console.log("search : "+this.Type);
+  }
+  PreparationMicro(){
   
+
+      this.speechRecognition.hasPermission()
+      .then((hasPermission: boolean) => {
+        console.log('Droit d\'utiliser la reconnaissance vocale ? : ' + hasPermission);
+        this.speechRecognition.isRecognitionAvailable()
+         .then((available: boolean) => this.isSpeechAvailable = available)
+        if(!hasPermission) {
+          this.requestSpeechRecognitionPermission();
+        }
+        
+      });
+   
+  }
+  private requestSpeechRecognitionPermission(): void {
+    this.speechRecognition.requestPermission()
+    .then(
+      () => console.log('Permission accordée !'),
+      () => console.log('Permission refusée :/')
+    )
+  }
+  public startListening(): void {
+    this.isListening = true;
+    this.matches = '';
+    
+    let options = {
+      language: 'fr-FR',
+      matches: 1,
+      prompt: 'Je vous écoute ! :)',  // Android only
+      showPopup: true,                // Android only
+      showPartial: false              // iOS only
+    }
+    this.speechRecognition.startListening(options)
+    .subscribe(
+      (matches) => {
+        this.isListening = false;
+        this.titre = matches[0];
+        this.searchArray();
+        
+      },
+      (onerror) => {
+        this.isListening = false;
+        this.changeDetectorRef.detectChanges();
+        console.log(onerror);
+      }
+    )
+  }
+
+  public stopListening(): void {
+    this.speechRecognition.stopListening();
+  }
+
+  SearchVocal():void{
+
   }
   public search(titre: string)
   {
@@ -41,25 +109,22 @@ private idPage:number=1;
   }
     public searchArray()
     {  this.tab=null;
-      this.TabDroite=null;
-      this.TabGauche=null;
-      this.omdbServiceArray.getResutatArray(this.titre,this.idPage)
+      this.omdbServiceArray.getResutatArray(this.titre,this.idPage,this.Type)
       .then(resultatFetched => {
         this.resultats = resultatFetched;
         this.maxpage=this.resultats.totalResults/10;
         this.titre=this.titre;
         this.idPage=1;
         this.tab=this.resultats.Search;
+        this.changeDetectorRef.detectChanges();
         console.log("first tab dans le recherche  "+this.tab);
-        var m=this.tab.length/2;
-        var max=this.tab.length;
-        this.TabGauche=this.tab.slice(0,m);
-        this.TabDroite=this.tab.slice(m,max);
+        
+      
       })
       .catch(error=>this.error="Pas de connexion internet");
   }
   public upToDateResults(infiniteScroll?)
-    { this.omdbServiceArray.getResutatArray(this.titre,this.idPage)
+    { this.omdbServiceArray.getResutatArray(this.titre,this.idPage,this.Type)
       .then(resultatFetched => {
         this.resultats = resultatFetched;
         console.log(this.resultats);
@@ -82,8 +147,13 @@ private idPage:number=1;
   }
   public showDetails(imdbID:string){
     this.posterUrl=this.posterBaseUrl+imdbID;
-    console.log( this.posterUrl);
-    this.navCtrl.push('DetailsPage',{imdbID:imdbID,posterUrl:this.posterUrl})
+    this.maBase.isAddedFilm(imdbID)
+    .then(res=>{
+      let liked=res;
+      console.log("home "+liked);
+      this.navCtrl.push('DetailsPage',{imdbID:imdbID,posterUrl:this.posterUrl,type:this.Type,liked:liked})
+    })
+   
   }
 
 
@@ -100,6 +170,13 @@ loadMore(infiniteScroll): Promise<any> {
       resolve();
     }, 500);
   })
+}
+private addFavorieFilm(id:string){
+   
+  this.maBase.InsertIntoFilm(id);
+
+
+
 }
 testImg(src:string)
 { var newSrc=this.no_poster;

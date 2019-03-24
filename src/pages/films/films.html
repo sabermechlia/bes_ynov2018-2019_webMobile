@@ -1,0 +1,39 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title >Favoris</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (tap)="ImportExportProp($event)"  >
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar> 
+
+</ion-header>
+
+
+<ion-content *ngIf=tab class="fond">
+    <ion-list *ngFor=" let resultat of tab; let i = index " data-index="i">
+        <ion-item-sliding >
+            <ion-item (tap)="showDetails(resultat.imdbID)">
+                <ion-thumbnail item-left>
+                    <img [src]="resultat.Poster" (error)="img.src= no_poster" #img>
+                </ion-thumbnail>
+                <h2>{{resultat.Title}}</h2>
+                <p>{{resultat.Year}}</p>
+              </ion-item>
+          <ion-item-options side="end">
+              <button ion-button expandable (click)="delete(resultat.imdbID, i)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+          </ion-item-options>
+        </ion-item-sliding >
+    </ion-list>
+    
+    
+      
+       
+      
+      
+</ion-content>

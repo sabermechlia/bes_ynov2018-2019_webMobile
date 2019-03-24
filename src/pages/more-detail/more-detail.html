@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class="titre">MoreDetail</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="closeModel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="fond description">
+
+
+  <div *ngFor="let Season of allSeasonDetail">
+    <ion-card class="ion-card">
+      <ion-card-header>
+        <ion-card-title  style="color:aliceblue;display: inline;" (tap)="affichermasquer(Season.Season)">Season : {{Season.Season}}
+          <ion-icon style="display: inline;" end name="arrow-dropdown"></ion-icon>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div id={{Season.Season}} style="display: none">
+          <div *ngFor="let Episodes of Season.Episodes">
+            <ion-card class="ion-card">
+              <ion-card-header>
+                <ion-badge (tap)="showEpisode(Episodes.Episode,Season.Season)">Episode {{Episodes.Episode}}</ion-badge>
+                <ion-card-title style="color:cornsilk">{{Episodes.Title}}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+
+</ion-content>

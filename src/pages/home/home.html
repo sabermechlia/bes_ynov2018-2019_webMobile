@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-searchbar [(ngModel)]="titre" (ionInput)="searchArray($event)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="titre" (ionInput)="searchArray()"></ion-searchbar>
     <ion-buttons end>
-      <button ion-button icon-only>
+      <button ion-button icon-only >
         <ion-icon name="option"></ion-icon>
       </button>
-      <button ion-button icon-only>
-        <ion-icon name="settings"></ion-icon>
+      <button ion-button icon-only (tap)=' startListening()'>
+        <ion-icon name="mic"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -20,12 +20,18 @@
       <ion-row>
         <ion-col col-6 col-md-4 col-xl-3 *ngFor="let result of tab">
           <ion-card class="ion-card">
+              
+              <ion-fab top right (click)="addFavorieFilm(result.imdbID)">
+                  <button ion-fab mini><ion-icon  name="heart" ></ion-icon></button>
+                </ion-fab>
             <ion-card-content style="padding: 0%">
-              <img item-start (tap)="showDetails(result.imdbID)" [src]="testImg(result.Poster)">
+              <img item-start (tap)="showDetails(result.imdbID)" [src]="testImg(result.Poster)" (error)="img.src = no_poster" #img>
+             
             </ion-card-content>
             <div class="titre" style="text-align:center">
                             {{result.Title}}
               <ion-badge>{{result.Year}}</ion-badge>
+              
             </div>
           </ion-card>
         </ion-col>

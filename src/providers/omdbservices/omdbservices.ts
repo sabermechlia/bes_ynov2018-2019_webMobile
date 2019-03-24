@@ -1,3 +1,5 @@
+import { EpisodeGolbale } from './../../models/Episode-globa';
+import { Season } from './../../models/Season.interface';
 import { ImdbApiGlobal } from './../../models/imdbapi-global.model';
 import { Injectable } from '@angular/core';
 
@@ -16,6 +18,8 @@ export class omdbApiService{
     private type: string ='&type=';
     private more:string ='&s=';
     private id:string ='&i=';
+    private Season:string='&Season=';
+    private Episode:string='&Episode='
   constructor(private http: Http){
 
   }  
@@ -36,4 +40,22 @@ export class omdbApiService{
     .then(response => response.json() )
     .catch(error => console.log('une erreur est servenue'+error))
    }
+   public getDetailEpisode(imdbID:string,Season:string,Episode:string):Promise<EpisodeGolbale>{
+    const url=`${this.baseUrl}${this.id}${imdbID}${this.Season}${Season}${this.Episode}${Episode}`;
+    console.log(url);
+    return this.http.get(url)
+    .toPromise()
+    .then(response => response.json() )
+    .catch(error => console.log('une erreur est servenue'+error))
+   }
+   public getListeEpisodeBySeason(imdbID:string,Season:number):Promise<Season>{
+    const url=`${this.baseUrl}${this.id}${imdbID}${this.Season}${Season}`;
+    console.log(url);
+    return this.http.get(url)
+    .toPromise()
+    .then(response => response.json() )
+    .catch(error => console.log('une erreur est servenue'+error))
+   }
+   
+  
 }

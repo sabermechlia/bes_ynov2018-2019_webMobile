@@ -4,7 +4,9 @@
     margin: 0%;
     padding: 0%
     }
-      
+    .tabs-md .tabbar {
+        background:  #383a3e;
+    }
     .MonSlides {
         
         width: 100%;
@@ -13,10 +15,13 @@
         
       }
     .ion-card{
-        background:  rgb(37, 37, 37);
+        background: #1e2023; 
+    }
+    .Dark{
+        background-color:#1e2023;
     }
     .fond{
-        background:  rgb(31, 31, 31);
+        background:  #383a3e;
     }
     .titre{
         color: blanchedalmond;
@@ -26,4 +31,55 @@
     .description{
         color: blanchedalmond;
         font-size:0.9
-         }
+    }
+    .myview {
+ 
+    
+        background-image: url('../assets/imgs/img.png')
+    }
+    .star{
+        color: #ffce00;
+    }
+    .liked{
+            color: #008cff;
+    
+    }
+    .centrage {
+        text-align: center;
+    }
+    .cool-button-div {
+
+        position: relative;
+        width:100%;
+        margin:auto;
+        margin-top:0;
+    
+    }
+    
+.bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+    filter: blur(10px);
+  }
+  
+  .bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 50%;
+    min-height: 50%;
+  }
+  //popover
+  .custom-popover .popover-content {
+    width: 80%;
+    top: 70px;
+    left: 30px;
+    bottom: 70px
+  }

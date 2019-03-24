@@ -7,6 +7,8 @@ export class ImdbApiGlobal {
     Released : string;
     Runtime : string;
     Genre : string;
+    Season:string;
+    Episode:string;
     Director : string;
     Writer : string;
     Actors : string;
@@ -23,4 +25,7 @@ export class ImdbApiGlobal {
     Type : string;
     totalSeasons : string;
     Response : string;
+    Liked:boolean=false;
+
+    
 }

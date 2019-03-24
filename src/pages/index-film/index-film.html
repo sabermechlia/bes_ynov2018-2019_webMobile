@@ -1,0 +1,57 @@
+
+<ion-header >
+  <ion-navbar >
+      
+          <button ion-button menuToggle  >
+              <ion-icon name="person"></ion-icon>
+          </button> 
+          
+      <ion-buttons end>
+      <button ion-button icon-only (tap)="searchPage()"  >
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+  
+</ion-header>  
+<ion-content *ngIf=array class="fond">
+    <ion-card class="ion-card">
+    <ion-card-content class="titre">
+        <h4 style="color:rgba(248, 241, 241, 0.986) ">Box Office</h4>
+    </ion-card-content>
+  </ion-card>
+    <ion-slides slidesPerView="3"   class="MonSlides">
+           <ion-slide  *ngFor="let result of array" > 
+            <ion-card class="ion-card">
+            <ion-card-content  style="padding: 0%">
+                <img  
+                (tap)="showDetails(result.imdbID)"
+                 [src]="testImg(result.Poster)" (error)="img.src = no_poster" #img>           
+                <div class="titre">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col>
+                          {{result.imdbRating}} 
+                           <ion-icon name="star" class="star"></ion-icon>
+                      </ion-col>
+                      <ion-col>
+                        
+                            <ion-icon  name="heart" (click)="addFavorieFilm(result.imdbID)"></ion-icon>
+                 
+                         
+                       </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                 
+                
+                </div>
+                </ion-card-content>
+                </ion-card>
+          </ion-slide>
+        </ion-slides>
+        
+       </ion-content>
+<ion-footer>
+</ion-footer>
+     

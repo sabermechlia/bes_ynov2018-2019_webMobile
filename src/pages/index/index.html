@@ -1,57 +1,16 @@
 
 <ion-header >
-  <ion-navbar >
-    <ion-buttons end>
-      <button ion-button icon-only (tap)="searchPage()"  >
-        <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-navbar class="ion-card">
+      
+          <button ion-button menuToggle  >
+              <ion-icon name="person"></ion-icon>
+          </button> 
   </ion-navbar>
   
 </ion-header>  
-<ion-content *ngIf=arrays class="fond">
-    <ion-card class="ion-card">
-    <ion-card-content>
-        <h4 class="titre">Box Office</h4>
-    </ion-card-content>
-  </ion-card>
-    <ion-slides slidesPerView="3"   class="MonSlides">
-           <ion-slide  *ngFor="let result of arrays" > 
-            <ion-card class="ion-card">
-                <ion-card-content style="padding: 0%">
-                <img  
-                (tap)="showDetails(result.imdbID)"
-                 [src]="testImg(result.Poster)">           
-                <div class="titre">
-                  {{result.imdbRating}}
-                  <ion-icon name="star"></ion-icon>
-                </div>
-                </ion-card-content>
-                </ion-card>
-          </ion-slide>
-        </ion-slides>
-        <ion-card class="ion-card">
-        <ion-card-content>
-            <h4 class="titre">News </h4>
-        </ion-card-content>
-      </ion-card>
-        <ion-slides class="MonSlides" >
-            <ion-slide  *ngFor="let article of news.articles"  > 
-                <ion-card class="ion-card">
-                    <img  [src]=article.urlToImage/>
-                    <ion-card-content>
-                      <ion-card-title class="titre">
-                          {{article.title}}
-                        </ion-card-title>
-                      <p class="description">
-                        {{article.content}}
-                      </p>
-                    </ion-card-content>
-                  </ion-card>
-           </ion-slide>
-          </ion-slides>
+<ion-content *ngIf=array  style="background-color: transparent !important">
+          <div id='Maps' class="map"></div>
        </ion-content>
 <ion-footer>
-    NewsAPI.org
 </ion-footer>
      

@@ -1,12 +1,9 @@
 import { OmdbArray } from './../../models/omdb_array.model';
 import { Injectable } from '@angular/core';
-
-AlertController
 import {Http} from '@angular/http'
-
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
-import { AlertController } from 'ionic-angular';
+
 
  
 @Injectable()
@@ -20,14 +17,15 @@ export class omdbServiceArray{
   constructor(private http: Http){
 
   }  
-  public getResutatArray(titre:string,idPage:number) :Promise<OmdbArray>{
+  public getResutatArray(titre:string,idPage:number,Type:string) :Promise<OmdbArray>{
     
-   const url=`${this.baseUrl}${this.more}${titre}${this.page}${idPage}`;
+   const url=`${this.baseUrl}${this.more}${titre}${this.page}${idPage}${this.type}${Type}`;
    console.log(url);
    return this.http.get(url)
    .toPromise()
    .then(response => response.json() )
    .catch(error => console.log('une erreur est servenue'+error))
   }
+  
    
 }

@@ -1,24 +1,42 @@
 <ion-header>
   <ion-navbar>
     <ion-title class="titre" *ngIf="resultat">{{resultat.Title}}</ion-title>
-  </ion-navbar>
+    <ion-buttons end >
+      <button ion-button icon-only (tap)="download()"  >
+        <ion-icon name="download"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="liked==false">
+        <button ion-button icon-only (tap)="addFavorieFilm(resultat.imdbID)"  >
+          <ion-icon name="thumbs-up" ></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-buttons end *ngIf="liked==true">
+        <button ion-button icon-only (tap)="deleteFavorieFilm(resultat.imdbID)"  > 
+          <ion-icon name="thumbs-down"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar> 
 </ion-header>
 
 
 <ion-content class="fond description">
-  <ion-card class="ion-card" *ngIf="resultat">
+  <div *ngIf="resultat">
+     <ion-card class="ion-card" *ngIf="resultat">
+        <div class="bg" >
+            <img src={{posterUrl}} (error)="img.src = no_poster" #img />  
+        </div>
+        <ion-fab center middle *ngIf=video (tap)="youtubeVideo.openVideo(video?.id?.videoId ? video?.id?.videoId : video?.id)">
+          <button ion-fab color="light"><ion-icon name="play"></ion-icon></button>
+        </ion-fab>
     <ion-card-content style="padding: 0%">
-      <img src={{posterUrl}} />
+      <img src={{posterUrl}} (error)="img.src = no_poster" #img />
       <ion-slides class="MonSlides" slidesPerView="3" loop="true">
-        <ion-slide >
-          <ion-badge color="dark">
-            {{resultat.Genre}}
-          </ion-badge>
-        </ion-slide>
+          
         <ion-slide>
           <ion-badge color="dark">
             {{resultat.Year}}
-          </ion-badge>
+          </ion-badge> 
         </ion-slide>
         <ion-slide>
           <ion-badge color="dark">
@@ -34,4 +52,31 @@
       </ion-slides>
     </ion-card-content>
   </ion-card>
+    <ion-card class="ion-card" style="background-color: transparent !important">
+        <ion-card-header>
+            <ion-card-title style="color:aliceblue">Genre </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{resultat.Genre}}
+          </ion-card-content>
+      <ion-card-header>
+        <ion-card-title style="color:aliceblue">Description</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{resultat.Plot}}
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title style="color:aliceblue">Acteur</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{resultat.Actors}}
+      </ion-card-content>
+    </ion-card> 
+  </div>
+  <div *ngIf='type==="series"'>
+    <ion-chip (tap)="openMoreDetail()" color="dark" class="cool-button-div">
+      <ion-label style="text-align: center">Show More <ion-icon name="arrow-dropdown-circle"></ion-icon>
+      </ion-label>
+    </ion-chip>
+  </div>
 </ion-content>

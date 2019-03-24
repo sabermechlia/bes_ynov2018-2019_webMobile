@@ -1,1 +1,32 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content" >
+    <!-- <ion-header class="fond" >
+          
+            <ion-title>Menu</ion-title>
+          
+        </ion-header> -->
+
+    <ion-content > 
+        <ion-card class="myview">
+            <!-- <ion-card-header>
+                <ion-card subtitle>Card Subtitle</ion-card>
+                <ion-card-title>Card Title</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                Keep close to Nature's heart... and break clear away, once in awhile,
+                and climb a mountain or spend a week in the woods. Wash your spirit clean.
+            </ion-card-content> -->
+        </ion-card>
+
+
+        <ion-list > 
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
